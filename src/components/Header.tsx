@@ -6,6 +6,8 @@ import type { Theme } from '../hooks/useTheme'
 const links = [
   { href: '#work', label: 'Work' },
   { href: '#about', label: 'About' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#education', label: 'Education' },
   { href: '#stack', label: 'Stack' },
   { href: '#contact', label: 'Contact' },
 ]
@@ -25,7 +27,7 @@ export function Header({ theme, onToggleTheme }: { theme: Theme; onToggleTheme: 
   useEffect(() => {
     if (!open) return
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
-    const mq = window.matchMedia('(min-width: 768px)')
+    const mq = window.matchMedia('(min-width: 901px)')
     const onMq = () => mq.matches && setOpen(false)
     window.addEventListener('keydown', onKey)
     mq.addEventListener('change', onMq)

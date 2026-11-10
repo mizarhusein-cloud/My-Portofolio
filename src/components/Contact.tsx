@@ -7,7 +7,7 @@ export function Contact() {
   return (
     <section id="contact" className="section contact">
       <div className="container">
-        <SectionHead index="04" label="Contact" />
+        <SectionHead index="06" label="Contact" />
         <h2 className="contact-title reveal">{contact.title}</h2>
         <p className="contact-text reveal">{contact.text}</p>
         <div className="contact-actions reveal">

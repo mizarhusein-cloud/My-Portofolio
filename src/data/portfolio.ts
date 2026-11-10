@@ -19,17 +19,35 @@ export interface Project {
   image: string
 }
 
-export interface Skill {
-  name: string
-  tag: string
+export interface Experience {
+  role: string
+  company: string
+  location: string
+  period: string
+  points: string[]
+  /** One line on how this job shows up in the way I build software. */
+  inCode: string
+}
+
+export interface Education {
+  school: string
+  program: string
+  period: string
+  status: 'Completed' | 'In progress'
   text: string
+}
+
+export interface Tool {
+  name: string
+  /** Simple Icons slug, e.g. 'react' → siReact (see src/components/Stack.tsx). */
+  icon: string
 }
 
 export const portfolio = {
   name: 'Franshin Mizar Husain',
   brand: 'Fraza',
   role: 'Frontend Developer',
-  location: 'Based in Indonesia',
+  location: 'Based in Bali, Indonesia',
 
   hero: {
     lines: ['Crafting calm, fast', 'interfaces that feel alive.'],
@@ -51,7 +69,7 @@ export const portfolio = {
       'security and the user experience front and centre.',
     highlights: [
       { title: 'Fresh perspective', text: 'Real-world thinking from a career switch, applied to every line of code.' },
-      { title: 'Real projects', text: 'A beach club, a pet shop and a finance API — built end to end.' },
+      { title: 'Real projects', text: 'A beach club, a pet shop, browser games and a finance API — built end to end.' },
       { title: 'AI-assisted speed', text: 'Modern tooling plus AI to learn fast and ship clean work.' },
       { title: 'Ready to join', text: "Open to frontend roles — let's build something great together." },
     ],
@@ -64,7 +82,7 @@ export const portfolio = {
       year: '2026',
       description:
         'A beach club website with online reservations, a digital menu, customer accounts and a secure admin dashboard.',
-      tech: ['Next.js', 'NestJS', 'TypeScript'],
+      tech: ['Next.js', 'React', 'NestJS', 'PostgreSQL', 'JWT'],
       liveUrl: 'https://saluna-beach-club.vercel.app',
       image: '/projects/saluna.jpg',
     },
@@ -72,30 +90,121 @@ export const portfolio = {
       title: 'Pawpaya Petshop',
       type: 'Pet shop website',
       year: '2026',
-      description: 'A cheerful online pet shop experience for browsing products and services for furry friends.',
-      tech: ['React', 'TypeScript'],
-      liveUrl: '',
-      image: '/projects/pawpaya.svg',
+      description:
+        'A pet shelter and pet shop site with a responsive product grid, category filters, dynamic product pages and an add-to-cart flow.',
+      tech: ['Next.js', 'React', 'Tailwind CSS', 'TypeScript'],
+      liveUrl: 'https://pawpaya.vercel.app',
+      image: '/projects/pawpaya.jpg',
+    },
+    {
+      title: 'Play With Me',
+      type: 'Mini games landing page',
+      year: '2026',
+      description:
+        'A playful landing page for three pixel-art browser games — Balloon Pop, Fly to Moon and Fruit Punch — each playable right in the browser.',
+      tech: ['HTML', 'CSS', 'JavaScript'],
+      liveUrl: 'https://revou-fsse-feb26.github.io/milestone-2-mizarhusein-cloud-1/',
+      image: '/projects/playwithme.jpg',
     },
     {
       title: 'Fintrack API',
-      type: 'REST API',
+      type: 'REST API · Backend',
       year: '2026',
-      description: 'A backend API for tracking personal finances — income, expenses and balances, kept tidy and secure.',
-      tech: ['NestJS', 'TypeScript'],
+      description:
+        'Backend for a personal finance tracker: JWT auth, per-user ownership checks, role-based access, rate limiting and automatic balance recalculation.',
+      tech: ['NestJS', 'PostgreSQL', 'Prisma', 'Docker'],
       liveUrl: '',
       image: '/projects/fintrack.svg',
     },
   ] satisfies Project[],
 
-  skills: [
-    { name: 'React', tag: 'UI library', text: 'Reusable, interactive components that keep interfaces clean and easy to grow.' },
-    { name: 'Next.js', tag: 'Framework', text: 'Fast, SEO-friendly apps with routing, server rendering and smooth deploys.' },
-    { name: 'TypeScript', tag: 'Language', text: 'Safer, self-documenting code that catches bugs before users ever see them.' },
-    { name: 'JavaScript', tag: 'Language', text: 'The foundation of everything I build — from DOM work to modern async logic.' },
-    { name: 'Three.js', tag: '3D on the web', text: 'Interactive 3D scenes — like the koi pond at the top of this page.' },
-    { name: 'NestJS', tag: 'Backend', text: 'Structured REST APIs so my frontends always have solid data to stand on.' },
-  ] satisfies Skill[],
+  /** Tools in the scrolling logo ribbon. Add one by adding its icon in Stack.tsx too. */
+  stack: [
+    { name: 'React', icon: 'react' },
+    { name: 'Next.js', icon: 'nextdotjs' },
+    { name: 'TypeScript', icon: 'typescript' },
+    { name: 'JavaScript', icon: 'javascript' },
+    { name: 'Tailwind CSS', icon: 'tailwindcss' },
+    { name: 'HTML', icon: 'html5' },
+    { name: 'Node.js', icon: 'nodedotjs' },
+    { name: 'NestJS', icon: 'nestjs' },
+    { name: 'PostgreSQL', icon: 'postgresql' },
+    { name: 'Postman', icon: 'postman' },
+    { name: 'Swagger', icon: 'swagger' },
+    { name: 'Railway', icon: 'railway' },
+  ] satisfies Tool[],
+
+  experience: [
+    {
+      role: 'Bank Teller',
+      company: 'PT Bank Central Asia Tbk (BCA)',
+      location: 'Indonesia',
+      period: 'Mar 2022 — Mar 2025',
+      points: [
+        'Processed 100+ cash and non-cash transactions daily with high accuracy and strict data confidentiality.',
+        'Served 50–200+ customers per day, resolving account issues and paperwork on the spot to avoid repeat visits.',
+        'Balanced the cash drawer at the end of every shift for three years, supporting accurate branch reconciliation.',
+        "Recommended BCA products matched to customer needs, supporting the branch's product and service targets.",
+      ],
+      inCode: 'Accuracy and data confidentiality — careful validation, secure auth and data I can trust.',
+    },
+    {
+      role: 'Telephone Operator',
+      company: 'The Retreat Palm Dubai MGallery by Sofitel',
+      location: 'Dubai, UAE',
+      period: 'Feb 2021 — Jun 2021',
+      points: [
+        'Handled 20–40 inbound calls per shift in English, routing each caller to the right resort department.',
+        'Resolved guest requests and complaints by phone, keeping service smooth for international guests.',
+        'Logged important calls and messages accurately so every follow-up reached the right team on time.',
+        'Scheduled guest appointments and shared hotel service information, easing the front-desk workload.',
+      ],
+      inCode: 'Clear communication — readable UI copy and getting every user to the right place fast.',
+    },
+    {
+      role: 'Food Server',
+      company: 'AYANA Resort and Spa',
+      location: 'Bali, Indonesia',
+      period: 'Jan 2018 — Dec 2020',
+      points: [
+        "Served 20–100+ guests per shift at Dava Restaurant, adjusting service pace to the resort's occupancy levels.",
+        'Coordinated orders with the kitchen team to deliver dishes on time during peak service hours.',
+        'Resolved meal and service complaints on the spot, protecting the guest experience and resort reputation.',
+        'Processed guest payments accurately at the end of each service, with every bill reconciled correctly.',
+      ],
+      inCode: 'Calm under peak pressure — teamwork, handoffs and shipping on time.',
+    },
+  ] satisfies Experience[],
+
+  education: [
+    {
+      school: 'RevoU',
+      program: 'Fullstack Software Engineering Bootcamp',
+      period: 'Feb 2026 — Sep 2026',
+      status: 'Completed',
+      text:
+        'An intensive program covering frontend and backend development with HTML, CSS, JavaScript, TypeScript, React, ' +
+        'Next.js, Node.js, NestJS and PostgreSQL — including REST API design, database design and authentication. ' +
+        'Built SALUNA and FinTrack API during the program and collaborated through Git and GitHub.',
+    },
+    {
+      school: 'Universitas Terbuka',
+      program: 'Bachelor of Management — Human Resources Management',
+      period: 'Dec 2023 — Present',
+      status: 'In progress',
+      text:
+        'Studying strategic management, services marketing, organizational behavior and statistics, which help me ' +
+        'understand the business needs behind the software I build. Final article in progress: a systematic literature ' +
+        'review on turnover intention among Generation Z employees in Indonesia.',
+    },
+  ] satisfies Education[],
+
+  certificates: [
+    { name: 'Fullstack Software Engineering', detail: 'RevoU, 2026' },
+    { name: 'TOEFL', detail: 'Score 563' },
+  ],
+
+  languages: ['Indonesian — Native', 'English — Professional working proficiency'],
 
   contact: {
     title: "Let's build something together.",

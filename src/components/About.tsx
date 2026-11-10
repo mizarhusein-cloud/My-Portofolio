@@ -6,11 +6,11 @@ import { useInViewOnce } from '../hooks/useInViewOnce'
 type Stat = { label: string; value: string; suffix?: string; infinite?: boolean }
 
 export function About() {
-  const { about, projects, skills } = portfolio
+  const { about, projects, stack } = portfolio
   const [statsRef, play] = useInViewOnce<HTMLDListElement>(0.5)
   const stats: Stat[] = [
     { value: String(projects.length), label: 'Projects built' },
-    { value: String(skills.length), label: 'Core tools' },
+    { value: String(stack.length), label: 'Core tools' },
     { value: '100', suffix: '%', label: 'Hands-on' },
     { value: '∞', label: 'Curiosity', infinite: true },
   ]
