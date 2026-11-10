@@ -29,6 +29,30 @@ export const ArrowUpRight = ({ size = 16 }: { size?: number }) => (
   </svg>
 )
 
+export const ArrowLeft = () => (
+  <svg {...base}>
+    <path d="M19 12H5M11 6l-6 6 6 6" />
+  </svg>
+)
+
+export const ArrowRight = () => (
+  <svg {...base}>
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+)
+
+export const MenuIcon = () => (
+  <svg {...base}>
+    <path d="M4 8h16M4 16h16" />
+  </svg>
+)
+
+export const CloseIcon = () => (
+  <svg {...base}>
+    <path d="M6 6l12 12M18 6 6 18" />
+  </svg>
+)
+
 export const ArrowDown = () => (
   <svg {...base} width={16} height={16}>
     <path d="M12 5v14M6 13l6 6 6-6" />

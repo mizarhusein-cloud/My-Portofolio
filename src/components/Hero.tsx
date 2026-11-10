@@ -63,7 +63,8 @@ export function Hero({ dark }: { dark: boolean }) {
         <a className="scroll-cue" href="#work">
           <ArrowDown /> Scroll
         </a>
-        <span className="hero-hint">Move your cursor — the koi follow. Click the pond to feed them.</span>
+        <span className="hero-hint hint-pointer">Move your cursor — the koi follow. Click the pond to feed them.</span>
+        <span className="hero-hint hint-touch">Tap the pond to feed the koi.</span>
       </div>
     </section>
   )

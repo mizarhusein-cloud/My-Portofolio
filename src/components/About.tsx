@@ -1,13 +1,18 @@
 import { portfolio } from '../data/portfolio'
 import { SectionHead } from './SectionHead'
+import { Odometer } from './Odometer'
+import { useInViewOnce } from '../hooks/useInViewOnce'
+
+type Stat = { label: string; value: string; suffix?: string; infinite?: boolean }
 
 export function About() {
   const { about, projects, skills } = portfolio
-  const stats = [
+  const [statsRef, play] = useInViewOnce<HTMLDListElement>(0.5)
+  const stats: Stat[] = [
     { value: String(projects.length), label: 'Projects built' },
     { value: String(skills.length), label: 'Core tools' },
-    { value: '100%', label: 'Hands-on' },
-    { value: '∞', label: 'Curiosity' },
+    { value: '100', suffix: '%', label: 'Hands-on' },
+    { value: '∞', label: 'Curiosity', infinite: true },
   ]
 
   return (
@@ -21,11 +26,23 @@ export function About() {
             <p>{about.body}</p>
           </div>
         </div>
-        <dl className="stats reveal">
+        <dl className="stats" ref={statsRef}>
           {stats.map((s) => (
             <div key={s.label} className="stat">
               <dt>{s.label}</dt>
-              <dd>{s.value}</dd>
+              <dd>
+                <span className="sr-only">
+                  {s.value}
+                  {s.suffix}
+                </span>
+                {s.infinite ? (
+                  <span className={`odo-inf${play ? ' is-playing' : ''}`} aria-hidden="true">
+                    {s.value}
+                  </span>
+                ) : (
+                  <Odometer value={s.value} suffix={s.suffix} play={play} />
+                )}
+              </dd>
             </div>
           ))}
         </dl>

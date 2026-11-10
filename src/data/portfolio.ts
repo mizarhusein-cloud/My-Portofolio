@@ -1,7 +1,8 @@
 /* =====================================================================
    PORTFOLIO CONTENT — edit this file to change the text on the site.
 
-   Add a project: copy one { ... } block inside `projects` and edit it.
+   Add a project: copy one { ... } block inside `projects` and edit it,
+   and put its preview image in public/projects/.
    liveUrl: the LIVE website link only (e.g. https://xxx.vercel.app).
             Leave it "" when it isn't live yet — the card shows
             "Live demo soon". Never put GitHub links here.
@@ -14,6 +15,8 @@ export interface Project {
   description: string
   tech: string[]
   liveUrl: string
+  /** Preview image in /public/projects (screenshot of the site, 16:10 works best). */
+  image: string
 }
 
 export interface Skill {
@@ -63,6 +66,7 @@ export const portfolio = {
         'A beach club website with online reservations, a digital menu, customer accounts and a secure admin dashboard.',
       tech: ['Next.js', 'NestJS', 'TypeScript'],
       liveUrl: 'https://saluna-beach-club.vercel.app',
+      image: '/projects/saluna.jpg',
     },
     {
       title: 'Pawpaya Petshop',
@@ -71,6 +75,7 @@ export const portfolio = {
       description: 'A cheerful online pet shop experience for browsing products and services for furry friends.',
       tech: ['React', 'TypeScript'],
       liveUrl: '',
+      image: '/projects/pawpaya.svg',
     },
     {
       title: 'Fintrack API',
@@ -79,6 +84,7 @@ export const portfolio = {
       description: 'A backend API for tracking personal finances — income, expenses and balances, kept tidy and secure.',
       tech: ['NestJS', 'TypeScript'],
       liveUrl: '',
+      image: '/projects/fintrack.svg',
     },
   ] satisfies Project[],
 
