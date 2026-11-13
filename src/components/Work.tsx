@@ -1,6 +1,7 @@
 import { useCallback, useRef, useState, type CSSProperties, type KeyboardEvent, type PointerEvent } from 'react'
 import { portfolio, type Project } from '../data/portfolio'
 import { SectionHead } from './SectionHead'
+import { ProjectDialog } from './ProjectDialog'
 import { ArrowLeft, ArrowRight, ArrowUpRight } from './Icons'
 
 function hostOf(url: string) {
@@ -20,44 +21,26 @@ function offsetOf(i: number, active: number, total: number) {
   return d
 }
 
-function Card({ project, index, total }: { project: Project; index: number; total: number }) {
+function Card({ project, index, total, onOpen }: { project: Project; index: number; total: number; onOpen: () => void }) {
   const pad = (n: number) => String(n).padStart(2, '0')
-  const media = (
-    <>
-      <span className="browser-bar" aria-hidden="true">
-        <i />
-        <i />
-        <i />
-        <span className="browser-url">{project.liveUrl ? hostOf(project.liveUrl) : 'coming soon'}</span>
-      </span>
-      <span className="preview-img">
-        <img src={project.image} alt={`Preview of ${project.title}`} loading="lazy" decoding="async" width={1280} height={800} />
-        {project.liveUrl ? (
-          <span className="preview-hover" aria-hidden="true">
-            Visit live site <ArrowUpRight />
-          </span>
-        ) : (
-          <span className="preview-badge">Live demo soon</span>
-        )}
-      </span>
-    </>
-  )
 
   return (
     <>
-      {project.liveUrl ? (
-        <a
-          className="preview is-link"
-          href={project.liveUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Open ${project.title} live site (opens in a new tab)`}
-        >
-          {media}
-        </a>
-      ) : (
-        <div className="preview">{media}</div>
-      )}
+      <button type="button" className="preview is-link" onClick={onOpen} aria-label={`View ${project.title} project details`}>
+        <span className="browser-bar" aria-hidden="true">
+          <i />
+          <i />
+          <i />
+          <span className="browser-url">{project.liveUrl ? hostOf(project.liveUrl) : 'coming soon'}</span>
+        </span>
+        <span className="preview-img">
+          <img src={project.image} alt="" loading="lazy" decoding="async" width={1280} height={800} />
+          <span className="preview-hover" aria-hidden="true">
+            View project details <ArrowUpRight />
+          </span>
+          {!project.liveUrl && <span className="preview-badge is-left">Live demo soon</span>}
+        </span>
+      </button>
       <div className="card-info">
         <div className="slide-head">
           <span className="project-num">
@@ -68,13 +51,9 @@ function Card({ project, index, total }: { project: Project; index: number; tota
           </span>
         </div>
         <h3 className="project-title">
-          {project.liveUrl ? (
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-              {project.title}
-            </a>
-          ) : (
-            project.title
-          )}
+          <button type="button" onClick={onOpen}>
+            {project.title}
+          </button>
         </h3>
         <p className="project-desc">{project.description}</p>
         <ul className="tags" aria-label="Tech stack">
@@ -82,6 +61,9 @@ function Card({ project, index, total }: { project: Project; index: number; tota
             <li key={t}>{t}</li>
           ))}
         </ul>
+        <button type="button" className="card-more" onClick={onOpen}>
+          Background, method &amp; results <ArrowRight />
+        </button>
       </div>
     </>
   )
@@ -91,6 +73,7 @@ export function Work() {
   const { projects } = portfolio
   const total = projects.length
   const [active, setActive] = useState(0)
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
   const drag = useRef<{ x: number; y: number; id: number } | null>(null)
   const swiped = useRef(false)
   const pad = (n: number) => String(n).padStart(2, '0')
@@ -144,7 +127,7 @@ export function Work() {
             onPointerUp={onPointerUp}
             onPointerCancel={() => (drag.current = null)}
             onClickCapture={(e) => {
-              // A swipe must not also open the live site underneath the pointer.
+              // A swipe must not also open the project details underneath the pointer.
               if (swiped.current) {
                 e.preventDefault()
                 e.stopPropagation()
@@ -167,7 +150,7 @@ export function Work() {
                   aria-hidden={!isActive}
                 >
                   <div className="cf-inner" inert={!isActive}>
-                    <Card project={p} index={i} total={total} />
+                    <Card project={p} index={i} total={total} onOpen={() => setOpenIndex(i)} />
                   </div>
                   {!isActive && pos !== 'far' && (
                     <button type="button" className="cf-hit" tabIndex={-1} aria-label={`Show ${p.title}`} onClick={() => goTo(i)} />
@@ -205,6 +188,18 @@ export function Work() {
           </div>
         </div>
       </div>
+
+      <ProjectDialog
+        project={openIndex === null ? null : projects[openIndex]}
+        index={openIndex ?? 0}
+        total={total}
+        onClose={() => setOpenIndex(null)}
+        onNavigate={(i) => {
+          // Keep the carousel in step with the dialog.
+          setOpenIndex(i)
+          goTo(i)
+        }}
+      />
     </section>
   )
 }

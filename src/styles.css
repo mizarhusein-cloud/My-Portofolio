@@ -624,6 +624,439 @@ a {
   color: var(--muted);
 }
 
+/* ---------------------------------------------------------------- project card → details */
+button.preview {
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.preview-badge.is-left {
+  right: auto;
+  left: 16px;
+}
+.project-title button {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.project-title button:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-thickness: 1px;
+}
+.card-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg);
+  cursor: pointer;
+}
+.card-more svg {
+  transition: transform 0.3s var(--ease);
+}
+.card-more:hover svg {
+  transform: translateX(4px);
+}
+
+/* ---------------------------------------------------------------- project details dialog */
+html.dialog-open {
+  overflow: hidden;
+}
+.pd {
+  width: min(1080px, calc(100vw - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--bg);
+  color: var(--fg);
+  overflow: hidden;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.25);
+}
+.pd[open] {
+  display: flex;
+  animation: pd-in 0.45s var(--ease);
+}
+.pd::backdrop {
+  background: rgba(10, 10, 10, 0.55);
+  backdrop-filter: blur(6px);
+  animation: pd-fade 0.35s ease;
+}
+@keyframes pd-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+}
+@keyframes pd-fade {
+  from {
+    opacity: 0;
+  }
+}
+.pd-panel {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 clamp(20px, 4vw, 48px) clamp(24px, 4vw, 40px);
+}
+.pd-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  margin: 0 calc(-1 * clamp(20px, 4vw, 48px));
+  padding: clamp(20px, 3vw, 32px) clamp(20px, 4vw, 48px) 18px;
+  background: var(--header-bg);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.pd-eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.pd-title {
+  margin-top: 6px;
+  font-size: clamp(26px, 3.6vw, 44px);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+.pd-close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.3s var(--ease);
+}
+.pd-close:hover {
+  border-color: var(--fg);
+  transform: rotate(90deg);
+}
+
+/* gallery */
+.pd-gallery {
+  margin-top: 24px;
+}
+.pd-shot {
+  margin: 0;
+}
+.pd-frame {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--card);
+}
+.pd-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  opacity: 0;
+  transform: scale(1.02);
+  transition: opacity 0.5s var(--ease), transform 0.8s var(--ease);
+}
+.pd-frame img.is-active {
+  opacity: 1;
+  transform: none;
+}
+.pd-nav {
+  position: absolute;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+  opacity: 0.92;
+  transition: transform 0.25s var(--ease), border-color 0.2s;
+}
+.pd-nav:hover {
+  border-color: var(--fg);
+  transform: scale(1.06);
+}
+.pd-nav.is-prev {
+  left: 14px;
+}
+.pd-nav.is-next {
+  right: 14px;
+}
+.pd-shot figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.pd-count {
+  font-variant-numeric: tabular-nums;
+}
+.pd-thumbs {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: thin;
+}
+.pd-thumbs button {
+  flex: none;
+  width: 112px;
+  aspect-ratio: 16 / 10;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--card);
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.25s, border-color 0.25s;
+}
+.pd-thumbs button:hover,
+.pd-thumbs button.is-active {
+  opacity: 1;
+}
+.pd-thumbs button.is-active {
+  border-color: var(--fg);
+}
+.pd-thumbs img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* body: facts & scope on the left, the story on the right */
+.pd-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: clamp(28px, 5vw, 64px);
+  margin-top: clamp(32px, 4vw, 48px);
+}
+.pd-aside {
+  align-self: start;
+  display: grid;
+  gap: 20px;
+}
+.pd-facts {
+  display: grid;
+  gap: 14px;
+}
+.pd-facts dt {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.pd-facts dd {
+  margin: 2px 0 0;
+  font-weight: 500;
+}
+.pd-live {
+  justify-self: start;
+}
+.pd-soon {
+  justify-self: start;
+  padding: 8px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.pd-scope {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+}
+.pd-scope h3 {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.pd-scope ul,
+.pd-block ul {
+  display: grid;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.pd-scope li,
+.pd-block li {
+  position: relative;
+  padding-left: 18px;
+  line-height: 1.55;
+}
+.pd-scope li {
+  font-size: 14px;
+}
+.pd-scope li::before,
+.pd-block li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.68em;
+  width: 7px;
+  height: 1px;
+  background: currentColor;
+}
+.pd-story {
+  display: grid;
+  gap: 36px;
+}
+.pd-block h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+.pd-block h3 span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.pd-block p {
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.pd-block li {
+  color: var(--muted);
+}
+
+/* previous / next project */
+.pd-foot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: clamp(36px, 5vw, 56px);
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.pd-foot button {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.pd-foot button:hover {
+  border-color: var(--fg);
+  background: var(--card);
+}
+.pd-foot button.is-next {
+  justify-content: flex-end;
+  text-align: right;
+}
+.pd-foot span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+.pd-foot small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.pd-foot strong {
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .pd-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Phones: the dialog becomes a full-screen sheet. */
+@media (max-width: 640px) {
+  .pd {
+    width: 100vw;
+    max-height: 100dvh;
+    height: 100dvh;
+    border: 0;
+    border-radius: 0;
+  }
+  .pd-nav {
+    width: 36px;
+    height: 36px;
+    margin-top: -18px;
+  }
+  .pd-nav.is-prev {
+    left: 8px;
+  }
+  .pd-nav.is-next {
+    right: 8px;
+  }
+  .pd-thumbs button {
+    width: 84px;
+  }
+  .pd-foot {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pd[open],
+  .pd::backdrop {
+    animation: none;
+  }
+  .pd-frame img {
+    transition: none;
+  }
+}
+
 /* ---------------------------------------------------------------- about */
 .about-grid {
   display: grid;
@@ -1232,7 +1665,52 @@ a {
 
 /* ---------------------------------------------------------------- contact */
 .contact {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   padding-bottom: clamp(96px, 14vw, 160px);
+}
+/* 3D sakura tree (src/sakura/SakuraScene.ts) — painted behind the text. */
+.sakura-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+}
+.contact.sakura-ready .sakura-canvas {
+  opacity: 1;
+}
+.contact-copy {
+  position: relative;
+}
+.contact-hint {
+  margin-top: 22px;
+  font-size: 13px;
+  color: var(--muted);
+}
+/* Desktop: tree on the left, text on the right. */
+@media (min-width: 901px) {
+  .contact:not(.no-sakura) {
+    min-height: clamp(740px, 94vh, 920px);
+  }
+  .contact:not(.no-sakura) .contact-copy {
+    margin-left: 48%;
+    padding-top: clamp(24px, 7vh, 80px);
+  }
+  .contact:not(.no-sakura) .contact-title {
+    font-size: clamp(40px, 4.8vw, 76px);
+  }
+}
+/* Tablet & mobile: text first, the tree as a band underneath (matches SakuraScene.resize). */
+@media (max-width: 900px) {
+  .contact:not(.no-sakura) {
+    padding-bottom: calc(clamp(300px, 75vw, 520px) + 32px);
+  }
 }
 .contact-title {
   font-size: clamp(44px, 8vw, 112px);

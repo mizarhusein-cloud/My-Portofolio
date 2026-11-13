@@ -25,7 +25,7 @@ export default function App() {
         <Experience />
         <Education />
         <Stack />
-        <Contact />
+        <Contact dark={theme === 'dark'} />
       </main>
       <Footer />
     </>

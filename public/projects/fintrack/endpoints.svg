@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800" font-family="Inter, Arial, sans-serif">
+  <rect width="1280" height="800" fill="#f6f6f4"/>
+  <text x="64" y="84" font-size="15" letter-spacing="3" fill="#777">FINTRACK API · ENDPOINTS &amp; ACCESS</text>
+  <text x="64" y="128" font-size="34" font-weight="600" fill="#111">REST endpoints, guarded by JWT and roles</text>
+
+  <g font-size="15">
+    <!-- column 1 -->
+    <g transform="translate(64,170)">
+      <rect width="560" height="560" rx="18" fill="#fff" stroke="#e3e3df"/>
+      <text x="28" y="44" font-size="13" letter-spacing="2" fill="#888">AUTH · PUBLIC</text>
+      <g transform="translate(28,64)">
+        <rect width="64" height="26" rx="6" fill="#e8f2ea"/><text x="32" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#2f7a46">POST</text>
+        <text x="80" y="18" font-family="Consolas, monospace" fill="#111">/auth/register</text>
+      </g>
+      <g transform="translate(28,100)">
+        <rect width="64" height="26" rx="6" fill="#e8f2ea"/><text x="32" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#2f7a46">POST</text>
+        <text x="80" y="18" font-family="Consolas, monospace" fill="#111">/auth/login</text>
+        <text x="300" y="18" font-size="13" fill="#888">5 tries / 60 s</text>
+      </g>
+      <line x1="28" y1="150" x2="532" y2="150" stroke="#eee"/>
+      <text x="28" y="186" font-size="13" letter-spacing="2" fill="#888">ACCOUNTS · OWNER ONLY</text>
+      <g transform="translate(28,204)">
+        <rect width="64" height="26" rx="6" fill="#e8eef8"/><text x="32" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#2d5aa6">GET</text>
+        <text x="80" y="18" font-family="Consolas, monospace" fill="#111">/accounts · /accounts/:id</text>
+      </g>
+      <g transform="translate(28,240)">
+        <rect width="64" height="26" rx="6" fill="#f3eee6"/><text x="32" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#8a5a1c">CRUD</text>
+        <text x="80" y="18" font-family="Consolas, monospace" fill="#111">POST · PATCH · DELETE /accounts</text>
+      </g>
+      <g transform="translate(28,276)">
+        <rect width="64" height="26" rx="6" fill="#e8eef8"/><text x="32" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#2d5aa6">GET</text>
+        <text x="80" y="18" font-family="Consolas, monospace" fill="#111">/accounts/:id/transactions</text>
+      </g>
+      <line x1="28" y1="326" x2="532" y2="326" stroke="#eee"/>
+      <text x="28" y="362" font-size="13" letter-spacing="2" fill="#888">TRANSACTIONS · VIA OWNED ACCOUNT</text>
+      <g transform="translate(28,380)">
+        <rect width="64" height="26" rx="6" fill="#f3eee6"/><text x="32" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#8a5a1c">CRUD</text>
+        <text x="80" y="18" font-family="Consolas, monospace" fill="#111">/transactions · /transactions/:id</text>
+      </g>
+      <text x="28" y="440" font-size="14" fill="#555">Every write recalculates the account balance</text>
+      <text x="28" y="462" font-size="14" fill="#555">through BalanceCalculatorService.</text>
+      <line x1="28" y1="492" x2="532" y2="492" stroke="#eee"/>
+      <text x="28" y="526" font-size="14" fill="#555">403 for someone else's data · 404 when it doesn't exist</text>
+    </g>
+
+    <!-- column 2 -->
+    <g transform="translate(656,170)">
+      <rect width="560" height="300" rx="18" fill="#fff" stroke="#e3e3df"/>
+      <text x="28" y="44" font-size="13" letter-spacing="2" fill="#888">CATEGORIES · SHARED</text>
+      <g transform="translate(28,64)">
+        <rect width="64" height="26" rx="6" fill="#f3eee6"/><text x="32" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#8a5a1c">CRUD</text>
+        <text x="80" y="18" font-family="Consolas, monospace" fill="#111">GET · POST · PATCH /categories</text>
+      </g>
+      <g transform="translate(28,100)">
+        <rect width="64" height="26" rx="6" fill="#fbe9e9"/><text x="32" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#a63232">DEL</text>
+        <text x="80" y="18" font-family="Consolas, monospace" fill="#111">/categories/:id</text>
+        <text x="300" y="18" font-size="13" fill="#a63232">admin only</text>
+      </g>
+      <line x1="28" y1="150" x2="532" y2="150" stroke="#eee"/>
+      <text x="28" y="186" font-size="13" letter-spacing="2" fill="#888">USERS</text>
+      <g transform="translate(28,204)">
+        <rect width="64" height="26" rx="6" fill="#e8eef8"/><text x="32" y="18" text-anchor="middle" font-size="12" font-weight="700" fill="#2d5aa6">GET</text>
+        <text x="80" y="18" font-family="Consolas, monospace" fill="#111">/users</text>
+        <text x="300" y="18" font-size="13" fill="#888">login required</text>
+      </g>
+    </g>
+
+    <g transform="translate(656,494)">
+      <rect width="560" height="236" rx="18" fill="#111"/>
+      <text x="28" y="44" font-size="13" letter-spacing="2" fill="#9a9a9a">SECURITY LAYER</text>
+      <text x="28" y="86" font-size="17" fill="#fff">JWT bearer tokens · bcrypt (10 rounds)</text>
+      <text x="28" y="120" font-size="17" fill="#fff">Role guard · login rate limit</text>
+      <text x="28" y="154" font-size="17" fill="#fff">CORS allow-list · helmet() headers</text>
+      <text x="28" y="196" font-size="14" fill="#9a9a9a">Request-logging middleware on every route</text>
+    </g>
+  </g>
+</svg>
