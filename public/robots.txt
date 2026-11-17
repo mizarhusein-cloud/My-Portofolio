@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fraza-dev-portofolio.vercel.app/sitemap.xml

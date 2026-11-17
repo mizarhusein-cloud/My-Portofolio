@@ -5,10 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fraza.dev — Franshin Mizar Husain, Frontend Developer</title>
     <meta name="description" content="Franshin Mizar Husain — Frontend Developer building calm, fast interfaces with React, Next.js, TypeScript and Three.js." />
+    <meta name="author" content="Franshin Mizar Husain" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://fraza-dev-portofolio.vercel.app/" />
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)" />
-    <meta property="og:title" content="Fraza.dev — Frontend Developer" />
-    <meta property="og:description" content="Calm, fast interfaces that feel alive." />
+
+    <!-- Social previews (LinkedIn, WhatsApp, X, ...) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Fraza.dev" />
+    <meta property="og:url" content="https://fraza-dev-portofolio.vercel.app/" />
+    <meta property="og:title" content="Fraza.dev — Franshin Mizar Husain, Frontend Developer" />
+    <meta property="og:description" content="Frontend Developer from Bali building calm, fast interfaces with React, Next.js, TypeScript and Three.js." />
+    <meta property="og:image" content="https://fraza-dev-portofolio.vercel.app/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Fraza.dev — portfolio of Franshin Mizar Husain with a 3D koi pond" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Fraza.dev — Franshin Mizar Husain, Frontend Developer" />
+    <meta name="twitter:description" content="Frontend Developer from Bali building calm, fast interfaces with React, Next.js, TypeScript and Three.js." />
+    <meta name="twitter:image" content="https://fraza-dev-portofolio.vercel.app/og-image.jpg" />
+
+    <!-- Structured data: tells search engines who this site is about -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://fraza-dev-portofolio.vercel.app/#website",
+            "url": "https://fraza-dev-portofolio.vercel.app/",
+            "name": "Fraza.dev",
+            "inLanguage": "en",
+            "author": { "@id": "https://fraza-dev-portofolio.vercel.app/#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://fraza-dev-portofolio.vercel.app/#person",
+            "name": "Franshin Mizar Husain",
+            "alternateName": "Fraza",
+            "jobTitle": "Frontend Developer",
+            "url": "https://fraza-dev-portofolio.vercel.app/",
+            "image": "https://fraza-dev-portofolio.vercel.app/og-image.jpg",
+            "address": { "@type": "PostalAddress", "addressRegion": "Bali", "addressCountry": "ID" },
+            "sameAs": ["https://www.linkedin.com/in/franshin-mizar-h-aa4b73119"],
+            "alumniOf": [
+              { "@type": "EducationalOrganization", "name": "RevoU" },
+              { "@type": "CollegeOrUniversity", "name": "Universitas Terbuka" }
+            ],
+            "knowsAbout": ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS", "Three.js", "Node.js", "NestJS", "PostgreSQL"]
+          }
+        ]
+      }
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,6 +77,14 @@
   </head>
   <body>
     <div id="root"></div>
+    <noscript>
+      <h1>Franshin Mizar Husain — Frontend Developer</h1>
+      <p>
+        Frontend Developer based in Bali, Indonesia, building fast, responsive interfaces with React, Next.js and
+        TypeScript. Projects: Saluna Beach Club, Pawpaya Petshop, Play With Me and Fintrack API. Please enable
+        JavaScript to see the full portfolio.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
